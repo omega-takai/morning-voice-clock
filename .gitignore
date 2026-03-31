@@ -1,0 +1,17 @@
+/node_modules
+
+# next.js
+/.next/
+/out/
+
+# env files (can opt-in for committing if needed)
+.env*
+!.envrc
+!.env.example
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+*storybook.log
+storybook-static

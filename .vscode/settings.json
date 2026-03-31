@@ -1,0 +1,11 @@
+{
+  "cSpell.words": ["OOUI", "tldts"],
+  "tailwindCSS.classFunctions": ["tv"],
+  "tailwindCSS.experimental.classRegex": [["(`.*?`)", "(\".*?\")", "('.*?')"]],
+  "tailwindCSS.files.exclude": ["**/.git/**", "**/node_modules/**", "mocks/**"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.addMissingImports": "explicit",
+    "source.fixAll": "explicit"
+  }
+}

@@ -1,0 +1,21 @@
+[tools]
+node = "24"
+pnpm = "10"
+
+[tasks]
+dev = "pnpm run dev"
+build = "pnpm run build"
+start = "pnpm run start"
+lint = "pnpm run lint"
+
+[tasks.lint-fix]
+description = "Fix linting errors"
+run = "pnpm run lint:fix"
+
+[tasks.install]
+run = "pnpm install"
+description = "Install dependencies"
+
+[tasks.sort-package]
+description = "Sort package.json"
+run = "pnpm dlx sort-package-json"

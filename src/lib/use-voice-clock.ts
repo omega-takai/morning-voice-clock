@@ -11,7 +11,7 @@ interface UseVoiceClockReturn {
 
 export function useVoiceClock(): UseVoiceClockReturn {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [intervalOption, setIntervalOption] = useState<IntervalOption>(3);
+  const [intervalOption, setIntervalOption] = useState<IntervalOption>(1);
   const lastSpokenMinuteRef = useRef<number | null>(null);
 
   const speakTime = useCallback((date: Date) => {
@@ -19,7 +19,7 @@ export function useVoiceClock(): UseVoiceClockReturn {
 
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    const text = `${hours}時、${minutes}分です。`;
+    const text = `${hours}時、${minutes}分。 `.repeat(2);
 
     const utterance = new SpeechSynthesisUtterance(text);
     // 日本語のボイスを優先して選択する処理を入れることも可能
@@ -33,21 +33,19 @@ export function useVoiceClock(): UseVoiceClockReturn {
 
   // IsPlaying 変更時（Playアクション時）の初回発話
   const togglePlay = useCallback(() => {
-    setIsPlaying((prev) => {
-      const next = !prev;
-      if (next) {
-        // 再生開始時、ユーザーインタラクション起因ですぐに発話させる
-        speakTime(new Date());
-      } else {
-        // 停止時は現在キューにある音声をキャンセルする
-        if (typeof window !== 'undefined' && window.speechSynthesis) {
-          window.speechSynthesis.cancel();
-        }
-        lastSpokenMinuteRef.current = null;
+    if (!isPlaying) {
+      // 再生開始時、ユーザーインタラクション起因ですぐに発話させる
+      speakTime(new Date());
+      setIsPlaying(true);
+    } else {
+      // 停止時は現在キューにある音声をキャンセルする
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
       }
-      return next;
-    });
-  }, [speakTime]);
+      lastSpokenMinuteRef.current = null;
+      setIsPlaying(false);
+    }
+  }, [isPlaying, speakTime]);
 
   const setIntervalValue = useCallback((value: IntervalOption) => {
     setIntervalOption(value);

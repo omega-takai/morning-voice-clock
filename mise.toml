@@ -19,3 +19,6 @@ description = "Install dependencies"
 [tasks.sort-package]
 description = "Sort package.json"
 run = "pnpm dlx sort-package-json"
+
+[tasks.clean]
+run = "node -e \"fs.promises.rm('./.next', {recursive: true, force: true})\""

@@ -1,5 +1,4 @@
-import React from 'react';
-import { Play, Square } from 'lucide-react';
+import { VolumeOff, Volume2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface PlayControlProps {
@@ -9,27 +8,24 @@ interface PlayControlProps {
 
 export function PlayControl({ isPlaying, onToggle }: PlayControlProps) {
   return (
-    <div className="flex flex-col items-center justify-center p-8">
+    <div className="grid justify-items-center gap-2">
       <Button
         variant="ghost"
         size="icon"
         onClick={onToggle}
-        className={`w-36 h-36 rounded-full shadow-lg transition-all duration-300 transform active:scale-95 ${
+        className={`size-24 rounded-full shadow-lg transition-all duration-300 transform active:scale-95 ${
           isPlaying
-            ? 'bg-red-50 text-red-500 hover:bg-red-100 hover:text-red-600'
-            : 'bg-blue-50 text-blue-500 hover:bg-blue-100 hover:text-blue-600'
+            ? 'bg-blue-50 text-blue-500 hover:bg-blue-100 hover:text-blue-600'
+            : 'bg-red-50 text-red-500 hover:bg-red-100 hover:text-red-600'
         }`}
         aria-label={isPlaying ? '音声通知を停止する' : '音声通知を再生する'}
       >
         {isPlaying ? (
-          <Square className="w-16 h-16 fill-current" />
+          <Volume2 className="size-8 fill-current" />
         ) : (
-          <Play className="w-16 h-16 fill-current ml-2" />
+          <VolumeOff className="size-8 fill-current" />
         )}
       </Button>
-      <p className="mt-4 text-sm font-medium text-slate-500">
-        {isPlaying ? '音声通知を停止する' : '音声通知を再生する'}
-      </p>
     </div>
   );
 }

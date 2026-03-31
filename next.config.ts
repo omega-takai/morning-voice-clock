@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.GITHUB_ACTIONS ? '/nextjs-template' : '',
+  basePath: process.env.GITHUB_ACTIONS ? '/morning-voice-clock' : '',
 };
 
 export default nextConfig;
